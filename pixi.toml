@@ -16,5 +16,8 @@ clang-tools = "22.*"
 gxx = "16.*"
 libcxx-devel = "22.*"
 
-[target.win-64.dependencies]
+[environments.msvc]
+platforms = ["win-64"]
+
+[environments.msvc.dependencies]
 vs2026_win-64 = "19.*"

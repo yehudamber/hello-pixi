@@ -14,14 +14,19 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
+            env: default
             preset: linux-gcc-release
           - os: ubuntu-latest
+            env: default
             preset: linux-clang-libstdcxx-release
           - os: ubuntu-latest
+            env: default
             preset: linux-clang-libcxx-release
           - os: windows-latest
+            env: msvc
             preset: windows-msvc-release
           - os: windows-latest
+            env: default
             preset: windows-clang-release
 
     runs-on: ${{ matrix.os }}
@@ -32,6 +37,7 @@ jobs:
       - name: Setup Pixi Environment
         uses: prefix-dev/setup-pixi@v0.10.1
         with:
+          environments: ${{ matrix.env }}
           frozen: true
 
       - name: Configure
