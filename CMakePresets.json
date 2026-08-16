@@ -7,10 +7,9 @@
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-            },
-            "environment": {
-                "CMAKE_GENERATOR_PLATFORM": null
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_GENERATOR_PLATFORM": null,
+                "CMAKE_GENERATOR_TOOLSET": null
             }
         },
         {
