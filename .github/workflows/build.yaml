@@ -41,10 +41,10 @@ jobs:
           frozen: true
 
       - name: Configure
-        run: pixi run cmake --preset ${{ matrix.preset }}
+        run: pixi run -e ${{ matrix.env }} cmake --preset ${{ matrix.preset }}
 
       - name: Build
-        run: pixi run cmake --build --preset ${{ matrix.preset }}
+        run: pixi run -e ${{ matrix.env }} cmake --build --preset ${{ matrix.preset }}
 
       - name: Test
-        run: pixi run ctest --preset ${{ matrix.preset }}
+        run: pixi run -e ${{ matrix.env }} ctest --preset ${{ matrix.preset }}
