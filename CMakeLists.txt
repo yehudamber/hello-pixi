@@ -13,3 +13,7 @@ include(cmake/warnings.cmake)
 
 add_executable(hello hello.cpp)
 enable_cxx_warnings(hello)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  target_compile_definitions(hello PRIVATE USE_INCLUDES)
+endif()
