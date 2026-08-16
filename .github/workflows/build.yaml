@@ -42,7 +42,8 @@ jobs:
 
       - name: Print Environment
         if: matrix.os == 'windows-latest'
-        run: pixi run -e ${{ matrix.env }} Get-ChildItem env:
+        run: |
+          pixi run -e ${{ matrix.env }} Get-ChildItem env:
 
       - name: Configure
         run: pixi run -e ${{ matrix.env }} cmake --preset ${{ matrix.preset }}
