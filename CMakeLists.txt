@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_MODULE_STD ON)
 
+include(CTest)
 include(cmake/warnings.cmake)
 
 add_executable(hello hello.cpp)
@@ -16,4 +17,8 @@ enable_cxx_warnings(hello)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_compile_definitions(hello PRIVATE USE_INCLUDES)
+endif()
+
+if(BUILD_TESTING)
+  add_test(NAME run-hello COMMAND hello)
 endif()
