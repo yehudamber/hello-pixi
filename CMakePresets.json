@@ -8,8 +8,8 @@
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "CMAKE_GENERATOR_PLATFORM": null,
-                "CMAKE_GENERATOR_TOOLSET": null
+                "CMAKE_GENERATOR_PLATFORM": "",
+                "CMAKE_GENERATOR_TOOLSET": ""
             }
         },
         {
