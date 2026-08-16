@@ -40,14 +40,16 @@ jobs:
           environments: ${{ matrix.env }}
           frozen: true
 
-      - name: Prepare
-        if: matrix.os == 'windows-latest'
-        run: |
-          Get-ChildItem env:
-          Remove-Item env:CMAKE_GENERATOR_PLATFORM
-
       - name: Configure
+        if: matrix.os != 'windows-latest'
         run: pixi run -e ${{ matrix.env }} cmake --preset ${{ matrix.preset }}
+
+      - name: Configure (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          pixi run -e ${{ matrix.env }} pwsh -NoLogo `
+            -Command "Remove-Item Env:CMAKE_GENERATOR_PLATFORM -ErrorAction SilentlyContinue; cmake --preset ${{ matrix.preset }}"
 
       - name: Build
         run: pixi run -e ${{ matrix.env }} cmake --build --preset ${{ matrix.preset }}
