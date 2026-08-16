@@ -4,7 +4,7 @@
 import std;
 #endif
 
-int main()
+int main(int argc [[maybe_unused]], char* argv[])
 {
-    std::puts("Hello, world!");
+    std::println("Hello from {}", argv[0]);
 }
