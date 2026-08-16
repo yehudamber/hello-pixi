@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: ${{ matrix.preset }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            preset: linux-gcc-release
+          - os: ubuntu-latest
+            preset: linux-clang-libstdcxx-release
+          - os: ubuntu-latest
+            preset: linux-clang-libcxx-release
+          - os: windows-latest
+            preset: windows-msvc-release
+          - os: windows-latest
+            preset: windows-clang-release
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pixi Environment
+        uses: prefix-dev/setup-pixi@v0.10.1
+        with:
+          frozen: true
+
+      - name: Configure
+        run: pixi run cmake --preset ${{ matrix.preset }}
+
+      - name: Build
+        run: pixi run cmake --build --preset ${{ matrix.preset }}
+
+      - name: Test
+        run: pixi run ctest --preset ${{ matrix.preset }}
