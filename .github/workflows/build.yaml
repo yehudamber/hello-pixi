@@ -40,11 +40,9 @@ jobs:
           environments: ${{ matrix.env }}
           frozen: true
 
-      - name: Prepare
+      - name: Print Environment
         if: matrix.os == 'windows-latest'
-        run: |
-          Get-ChildItem env:
-          Remove-Item env:CMAKE_GENERATOR_PLATFORM
+        run: pixi run -e ${{ matrix.env }} Get-ChildItem env:
 
       - name: Configure
         run: pixi run -e ${{ matrix.env }} cmake --preset ${{ matrix.preset }}
